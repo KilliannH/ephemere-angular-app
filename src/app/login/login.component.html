@@ -1,1 +1,40 @@
-<p>login works!</p>
+<div id="login-container">
+    <form class="login-form">
+        <h3 style="text-align: center;">Login</h3>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                 placeholder="Ex. pat@example.com">
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <div class="spacer"></div>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+                   placeholder="falsy">
+          </mat-form-field>
+      </form>
+</div>
+
+<div class="btns-container">
+    <div class="btns-subcontainer">
+        <div class="submit-btn-container">
+            <button id="submit-btn" mat-raised-button color="primary">Submit</button>
+        </div>
+        <div class="btn-fb">
+            <div class="fb-content">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 64 64" width="64px" height="64px"><path d="M32,6C17.641,6,6,17.641,6,32c0,12.999,9.54,23.769,22,25.693V40h-6v-7h6v-5c0-7,4-11,10-11c3.133,0,5,1,5,1v6h-4 c-2.86,0-4,2.093-4,4v5h7l-1,7h-6v17.822C47.945,56.334,58,45.344,58,32C58,17.641,46.359,6,32,6z" /></svg>
+                </div>
+                <p>Continue with Facebook</p>
+            </div>
+        </div>
+    </div>
+</div>
