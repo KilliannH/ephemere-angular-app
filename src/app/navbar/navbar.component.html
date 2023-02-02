@@ -5,6 +5,6 @@
    <a class="link" [routerLink]="'/'">{{appName}}</a>
    <span class="spacer"></span>
 
-   <button *ngIf="!connUser" mat-button class="login-button" aria-label="Login Button">Login</button>
-   <button *ngIf="connUser" mat-button class="logged-button" aria-label="Logged Button"><span class="profile-container"><img src="{{connUser.imageUrl}}"></span> {{connUser.username}}</button>
+   <button *ngIf="!_connUser" mat-button class="login-button" aria-label="Login Button">Login</button>
+   <button *ngIf="_connUser" mat-button class="logged-button" aria-label="Logged Button"><span class="profile-container"><img src="{{_connUser.imageUrl}}"></span> {{_connUser.username}}</button>
  </mat-toolbar>

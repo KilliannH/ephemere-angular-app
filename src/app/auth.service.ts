@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
+import { BehaviorSubject } from 'rxjs';
 import config from './config';
 import { UserDB } from './models/userDB';
 
@@ -8,7 +9,7 @@ import { UserDB } from './models/userDB';
 })
 export class AuthService {
 
-  user :UserDB | null = null;
+  public userInfo$ = new BehaviorSubject<any>(undefined);
 
   initParams: InitParams = {
     appId: config.fbAppId,
@@ -44,9 +45,10 @@ export class AuthService {
       return this.fb.api(
         '/' + userID,
         'get',
-        {"fields":"id,name,email,picture{url}"}).then((response) => {
-          console.log("getUserInfos", response);
-          return response;
+        {"fields":"id,name,email,picture{url}"}).then((res) => {
+          const userInfo = {email: res.email, username: res.name, facebookId: res.id, imageUrl: res.picture.data.url};
+          this.userInfo$.next(userInfo);
+          return res;
         });
   }
 }
