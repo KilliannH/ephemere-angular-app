@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import constants from '../constants';
+import { SocialUser } from '@abacritt/angularx-social-login';
+import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,9 @@ import constants from '../constants';
 })
 export class NavbarComponent implements OnInit {
 
-  appName: string = constants.appName
+  @Input()
+  appName: string = '';
+
   constructor() { }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { SocialAuthService, FacebookLoginProvider, SocialUser } from "@abacritt/angularx-social-login";
+import { AuthService } from '../auth.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -16,33 +17,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
 
   matcher = new MyErrorStateMatcher();
-  //@ts-ignore
-  user: SocialUser;
-  //@ts-ignore
-  loggedIn: boolean;
   
-  constructor(private authService: SocialAuthService) { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      console.log(user);
-      this.loggedIn = (user != null);
-    });
+  doSignInWithFB(): void {
+    this.authService.signInWithFB();
   }
 
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    console.log(this.authService.authState);
-  }
-
-  signOut(): void {
-    this.authService.signOut();
+  doLogout(): void {
+    this.authService.logout();
   }
 }
