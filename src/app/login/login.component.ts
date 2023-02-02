@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import { SocialAuthService, FacebookLoginProvider, SocialUser } from "@abacritt/angularx-social-login";
 import { AuthService } from '../auth.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -26,8 +25,10 @@ export class LoginComponent {
   
   constructor(private authService: AuthService) { }
 
-  doSignInWithFB(): void {
-    this.authService.signInWithFB();
+  doSignInWithFB(): Promise<void> {
+    return this.authService.signInWithFB().then((response) => {
+      console.log(response);
+    });
   }
 
   doLogout(): void {

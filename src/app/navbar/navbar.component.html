@@ -5,5 +5,6 @@
    <span>{{appName}}</span>
    <span class="spacer"></span>
 
-   <button mat-button class="login-button" aria-label="Login Button">Login</button>
+   <button *ngIf="!connUser" mat-button class="login-button" aria-label="Login Button">Login</button>
+   <button *ngIf="connUser" mat-button class="login-button" aria-label="Login Button">{{connUser.email}}</button>
  </mat-toolbar>

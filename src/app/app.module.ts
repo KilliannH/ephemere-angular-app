@@ -10,6 +10,7 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { FacebookModule } from 'ngx-facebook';
 import config from './config';
 
 @NgModule({
@@ -25,7 +26,8 @@ import config from './config';
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FacebookModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,6 +11,9 @@ export class NavbarComponent implements OnInit {
 
   @Input()
   appName: string = '';
+  
+  @Input()
+  connUser: any | null;
 
   constructor() { }
 
