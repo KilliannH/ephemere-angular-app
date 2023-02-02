@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
         this.authService.getLoginStatus().then((response: any) => {
           console.log(response);
           if(response && response.status == 'connected') {
-            this.authService.getUserInfos(response.authResponse.userID).then((res: any) => {
+            this.authService.getUserInfos(response).then((res: any) => {
               console.log(res);
             });
           }

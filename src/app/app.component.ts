@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, Subscriber, Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
+import constants from './constants';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,6 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Ephemere';
+  title = constants.appName;
   loading: boolean = true;
 }

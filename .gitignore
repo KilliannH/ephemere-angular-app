@@ -45,3 +45,5 @@ config.ts
 /.vscode/
 /certs/localhost.crt
 /certs/localhost.key
+
+proxy.conf.json

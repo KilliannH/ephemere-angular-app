@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { AuthService } from '../auth.service';
+import constants from '../constants';
+import { DataService } from '../data.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -23,12 +25,20 @@ export class LoginComponent {
 
   matcher = new MyErrorStateMatcher();
   
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private dataService: DataService) { }
 
   doSignInWithFB(): Promise<void> {
-    return this.authService.signInWithFB().then((response) => {
-      console.log(response);
-      
+    return this.authService.signInWithFB().then((response: any) => {
+      // TODO - extract this somewhere else.
+      // We do an api login from every successful auth methods 
+      const claims = {
+        sub: {
+            facebookId: response.authResponse.userID,
+            accessToken: response.authResponse.accessToken
+        },
+        issuer: constants.appName
+      }
+      return this.dataService.apiLogin(claims).then((res) => console.log(res));
     });
   }
 
