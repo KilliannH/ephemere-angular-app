@@ -27,14 +27,14 @@ export class NavbarComponent implements OnInit {
           if(response && response.status == 'connected') {
             this.authService.getUserInfos(response.authResponse.userID).then((res: any) => {
               console.log(res);
-              this.userInfoSubscritpion$ = this.authService.userInfo$.subscribe((data) => {
-                if(data) {
-                  this._connUser = data;
-                  console.log("logged in with user data: ", data);
-                }
-              });
             });
           }
+          this.userInfoSubscritpion$ = this.authService.userInfo$.subscribe((data) => {
+            if(data) {
+              this._connUser = data;
+              console.log("logged in with user data: ", data);
+            }
+          });
         });
       }
     });

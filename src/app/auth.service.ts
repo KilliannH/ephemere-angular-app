@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 import { BehaviorSubject } from 'rxjs';
 import config from './config';
-import { UserDB } from './models/userDB';
 
 @Injectable({
   providedIn: 'root'

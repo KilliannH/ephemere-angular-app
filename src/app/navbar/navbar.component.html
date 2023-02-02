@@ -11,10 +11,10 @@
    class="logged-button" aria-label="Logged Button"><span class="profile-container"><img src="{{_connUser.imageUrl}}"></span> {{_connUser.username}}</button>
    <mat-menu #menu="matMenu" [overlapTrigger]="false">
     <span>
-        <button mat-menu-item>
+        <a [routerLink]="'/settings'" mat-menu-item>
             <mat-icon>settings</mat-icon>
             <span>Settings</span>
-        </button>
+        </a>
         <button mat-menu-item (click)="doLogout()">
             <mat-icon>exit_to_app</mat-icon>
             <span>Logout</span>
