@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import constants from '../constants';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  appName: string = constants.appName
   constructor() { }
 
   ngOnInit(): void {

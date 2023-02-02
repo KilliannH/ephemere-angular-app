@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+config.ts
+/.vscode/
+/certs/localhost.crt
+/certs/localhost.key
