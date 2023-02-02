@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   appName: string = '';
   
   @Input()
-  connUser: any | null;
+  connUser: any;
 
   constructor() { }
 
