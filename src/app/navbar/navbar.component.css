@@ -10,9 +10,9 @@
 
 .profile-container > img {
     border-radius: 50%;
-    border: 1px solid #fff;
-    margin-right: 5px;
-    margin-top: 5px;
+    border: 1.8px solid #fff;
+    margin-right: 6px;
+    margin-top: 8px;
     width: 30px;
     height: 30px;
 }

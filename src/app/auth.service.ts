@@ -9,7 +9,7 @@ import { UserDB } from './models/userDB';
 })
 export class AuthService {
 
-  public userInfo$ = new BehaviorSubject<any>(undefined);
+  public userInfo$ = new BehaviorSubject<any>(null);
 
   initParams: InitParams = {
     appId: config.fbAppId,
@@ -30,7 +30,7 @@ export class AuthService {
   signInWithFB(): Promise<Object> {
     return this.fb.login().then((value: LoginResponse) => {
       console.log("signingWithFB", value);
-      return value;
+      return this.getUserInfos(value.authResponse.userID);
     });
   }
 
@@ -38,7 +38,10 @@ export class AuthService {
     return this.fb.getLoginStatus();
   }
 
-  logout(): void {
+  logout(): Promise<any> {
+    return this.fb.logout().then((value) => {
+      console.log("Logged out", value);
+    });
   }
 
   getUserInfos(userID: string): Promise<any> {
@@ -47,6 +50,8 @@ export class AuthService {
         'get',
         {"fields":"id,name,email,picture{url}"}).then((res) => {
           const userInfo = {email: res.email, username: res.name, facebookId: res.id, imageUrl: res.picture.data.url};
+          // TODO - remember to cancel behaviorSubject on logout
+          // see https://stackoverflow.com/questions/72556131/rxjs-behavioralsubject-for-storing-logged-in-user-data-in-angular-12
           this.userInfo$.next(userInfo);
           return res;
         });

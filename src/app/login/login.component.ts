@@ -28,6 +28,7 @@ export class LoginComponent {
   doSignInWithFB(): Promise<void> {
     return this.authService.signInWithFB().then((response) => {
       console.log(response);
+      
     });
   }
 

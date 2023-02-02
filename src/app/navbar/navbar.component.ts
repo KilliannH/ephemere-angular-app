@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   appName: string = '';
 
   userInfoSubscritpion$: Subscription | null = null;
-  _connUser: any;
+  _connUser: any = null;
 
   constructor(private authService: AuthService) {}
 
@@ -37,6 +37,13 @@ export class NavbarComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  doLogout() {
+    return this.authService.logout().then(() => {
+      console.log("FB Logged out");
+      this._connUser = null;
     });
   }
 

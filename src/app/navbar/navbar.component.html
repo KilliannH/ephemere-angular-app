@@ -5,6 +5,20 @@
    <a class="link" [routerLink]="'/'">{{appName}}</a>
    <span class="spacer"></span>
 
-   <button *ngIf="!_connUser" mat-button class="login-button" aria-label="Login Button">Login</button>
-   <button *ngIf="_connUser" mat-button class="logged-button" aria-label="Logged Button"><span class="profile-container"><img src="{{_connUser.imageUrl}}"></span> {{_connUser.username}}</button>
+   <a [routerLink]="'/login'" *ngIf="!_connUser" mat-button class="login-button" aria-label="Login Button">Login</a>
+   <button *ngIf="_connUser" mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
+   (click)="menuTrigger.openMenu()"
+   class="logged-button" aria-label="Logged Button"><span class="profile-container"><img src="{{_connUser.imageUrl}}"></span> {{_connUser.username}}</button>
+   <mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <span>
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="doLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
+  </span>
+  </mat-menu>
  </mat-toolbar>
