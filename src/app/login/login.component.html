@@ -1,6 +1,6 @@
 <div id="login-container">
     <form class="login-form">
-        <h3 style="text-align: center;">Login</h3>
+        <h3 style="text-align: center;">-- put logo here --</h3>
         <mat-form-field class="full-width-email">
           <mat-label>Email</mat-label>
           <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
@@ -26,8 +26,9 @@
 <div class="btns-container">
     <div class="btns-subcontainer">
         <div class="submit-btn-container">
-            <button id="submit-btn" mat-raised-button color="primary">Submit</button>
+            <button id="submit-btn" mat-raised-button color="primary">Log In</button>
         </div>
+        <small id="divider">------------ or ------------</small>
         <div class="btn-fb" (click)="doSignInWithFB()">
             <div class="fb-content">
                 <div class="logo">

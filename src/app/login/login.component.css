@@ -38,8 +38,8 @@
 }
 
 #submit-btn {
-    width: fit-content;
-    margin-bottom: 20%;
+  min-width: 250px;
+    margin-bottom: 3%;
 }
 
 .login-form {
@@ -58,7 +58,7 @@
     display: flex;
     align-items: center;
     width: 250px;
-    height: 50px;
+    height: 36px;
   }
   .fb-content .logo, .btn-fb .logo, .btn-fb .fb-content .logo {
     padding: 5px;
@@ -66,15 +66,22 @@
   }
   .fb-content svg, .btn-fb svg, .btn-fb .fb-content svg {
     width: 40px;
-    height: 47px;
+    height: 35px;
   }
   .fb-content p, .btn-fb p, .btn-fb .fb-content p {
     width: 100%;
-    line-height: 1;
+    line-height: 36px;
     letter-spacing: 0.21px;
     text-align: center;
+    font-size: 14px;
     font-weight: 500;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+  }
+
+  #divider {
+    text-align: center;
+    margin-bottom: 3%;
+    color: rgba(0,0,0,.54);
   }
 
   
