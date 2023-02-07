@@ -14,11 +14,11 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  apiLogin(claims: any): Promise<any> {
+  apiLogin(claims: any, userInfos: Object): Promise<any> {
     return new Promise((resolve, reject) => {
     return this._encodeToken(claims).then((encoded) => {
       console.log("encoded", encoded);
-      return this.http.post('/api/authenticate', {accessToken: encoded}).subscribe((res: any) => {
+      return this.http.post('/api/authenticate', {accessToken: encoded, userInfos: userInfos}).subscribe((res: any) => {
         console.log("result from be", res);
                 localStorage.setItem(constants.lsTokenKey, res.token);
                 resolve(res.user);
@@ -30,7 +30,6 @@ export class DataService {
   async _encodeToken(claims: any) {
 
     // facebookId is salted before sent
-    console.log("cccc", claims);
     const encoded = simpleCrypto.encrypt(claims.sub.facebookId, config.appSalts);
     claims.sub.facebookId = encoded;
 

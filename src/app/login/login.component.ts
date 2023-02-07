@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import constants from '../constants';
 import { DataService } from '../data.service';
@@ -25,12 +26,14 @@ export class LoginComponent {
 
   matcher = new MyErrorStateMatcher();
   
-  constructor(private authService: AuthService, private dataService: DataService) { }
+  constructor(private authService: AuthService, private dataService: DataService,
+    private router: Router) { }
 
-  doSignInWithFB(): Promise<void> {
+  doSignInWithFB(): Promise<any> {
     return this.authService.signInWithFB().then((response: any) => {
       // TODO - extract this somewhere else.
       // We do an api login from every successful auth methods 
+      console.log("ccc", response);
       const claims = {
         sub: {
             facebookId: response.authResponse.userID,
@@ -38,11 +41,22 @@ export class LoginComponent {
         },
         issuer: constants.appName
       }
-      return this.dataService.apiLogin(claims).then((res) => console.log(res));
+      const userInfos = {
+        id: response.userInfos.id,
+        email: response.userInfos.email,
+        name: response.userInfos.name,
+        imageUrl: response.userInfos.picture.data.url
+      }
+      return this.dataService.apiLogin(claims, userInfos).then((res) => {
+        console.log("doSigninWithFB",res);
+        return this.router.navigate(['/home']);
+      });
     });
   }
 
-  doLogout(): void {
-    this.authService.logout();
+  doLogout(): Promise<any> {
+    return this.authService.logout().then(() => {
+      return this.router.navigate(['/login']);
+    });
   }
 }
