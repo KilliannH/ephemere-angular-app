@@ -1,6 +1,7 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
   userInfoSubscritpion$: Subscription | null = null;
   _connUser: any = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
       this.authService.init().then((initialized) => {
@@ -40,10 +41,11 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  doLogout() {
+  doLogout(): Promise<any> {
     return this.authService.logout().then(() => {
       console.log("FB Logged out");
       this._connUser = null;
+      return this.router.navigate(['/login']);
     });
   }
 

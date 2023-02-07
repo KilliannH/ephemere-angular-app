@@ -53,10 +53,4 @@ export class LoginComponent {
       });
     });
   }
-
-  doLogout(): Promise<any> {
-    return this.authService.logout().then(() => {
-      return this.router.navigate(['/login']);
-    });
-  }
 }
