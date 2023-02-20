@@ -43,6 +43,7 @@ export class DataService {
   }
 
   getEvents() {
+    ////////////// Events - no events found nearby, button + Create One
     const headers = new HttpHeaders();
     if(!localStorage.getItem(constants.lsTokenKey)) {
       return;
