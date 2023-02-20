@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jose from "jose";
 //@ts-ignore
 import * as simpleCrypto from "simple-crypto";
@@ -40,5 +40,14 @@ export class DataService {
         .setProtectedHeader({ alg: 'HS512' })
         .sign(new TextEncoder().encode(config.appSecret))
     return jwt;
-}
+  }
+
+  getEvents() {
+    const headers = new HttpHeaders();
+    if(!localStorage.getItem(constants.lsTokenKey)) {
+      return;
+    }
+    headers.set("Authorization", localStorage.getItem(constants.lsTokenKey)!);
+    return this.http.get('/api/events', {headers: headers});
+  }
 }

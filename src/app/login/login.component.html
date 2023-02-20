@@ -1,34 +1,11 @@
 <div id="login-container">
-    <form class="login-form">
-        <h3 style="text-align: center;">-- put logo here --</h3>
-        <mat-form-field class="full-width-email">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                 placeholder="Ex. pat@example.com">
-          <mat-hint>Errors appear instantly!</mat-hint>
-          <div class="spacer"></div>
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-                   placeholder="falsy">
-          </mat-form-field>
-      </form>
+    <mat-card>
+        <mat-card-content>You need a Facebook account to use our app.</mat-card-content>
+      </mat-card>
 </div>
 
 <div class="btns-container">
     <div class="btns-subcontainer">
-        <div class="submit-btn-container">
-            <button id="submit-btn" mat-raised-button color="primary">Log In</button>
-        </div>
-        <small id="divider">------------ or ------------</small>
         <div class="btn-fb" (click)="doSignInWithFB()">
             <div class="fb-content">
                 <div class="logo">
