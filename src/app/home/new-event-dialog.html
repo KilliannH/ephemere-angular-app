@@ -2,11 +2,26 @@
 <div mat-dialog-content>
   <p>What's the facebook id?</p>
   <mat-form-field appearance="fill">
-    <mat-label>Facebook Id</mat-label>
-    <input matInput [(ngModel)]="data.facebookId">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Image Url</mat-label>
+    <input matInput [(ngModel)]="data.imageUrl">
+  </mat-form-field>
+  <br>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.facebookId" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

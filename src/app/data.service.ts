@@ -14,6 +14,11 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  createAuthorizationHeader() {
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem(constants.lsTokenKey));
+    return headers;
+  }
+
   apiLogin(claims: any, userInfos: Object): Promise<any> {
     return new Promise((resolve, reject) => {
     return this._encodeToken(claims).then((encoded) => {
@@ -43,12 +48,16 @@ export class DataService {
   }
 
   getEvents() {
-    ////////////// Events - no events found nearby, button + Create One
-    const headers = new HttpHeaders();
     if(!localStorage.getItem(constants.lsTokenKey)) {
       return;
     }
-    headers.set("Authorization", localStorage.getItem(constants.lsTokenKey)!);
-    return this.http.get('/api/events', {headers: headers});
+    return this.http.get('/api/events', {headers: this.createAuthorizationHeader()});
+  }
+
+  getVenues() {
+    if(!localStorage.getItem(constants.lsTokenKey)) {
+      return;
+    }
+    return this.http.get('/api/venues', {headers: this.createAuthorizationHeader()});
   }
 }

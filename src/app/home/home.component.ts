@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DataService } from '../data.service';
 import { NewEventDialogData } from '../models/newEventDialogData';
 
 @Component({
@@ -9,7 +10,7 @@ import { NewEventDialogData } from '../models/newEventDialogData';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +23,11 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  debug() {
+    // @ts-ignore
+    this.dataService.getVenues().subscribe((res) => console.log(res));
+  }
 }
 
 @Component({
@@ -29,10 +35,6 @@ export class HomeComponent implements OnInit {
   templateUrl: './new-event-dialog.html',
 })
 export class NewEventDialog {
-  // @ts-ignore
-  facebookId: string;
-  // @ts-ignore
-  name: string;
   constructor(
     public dialogRef: MatDialogRef<NewEventDialog>,
     @Inject(MAT_DIALOG_DATA)

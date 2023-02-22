@@ -1,4 +1,8 @@
+import {VenueDB} from './venueDB';
+
 export interface NewEventDialogData {
-    facebookId: string;
     name: string;
+    imageUrl: string;
+    venue: VenueDB;
+    occureDateTime: number;
 }
