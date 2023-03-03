@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthService } from '../auth.service';
 import { DataService } from '../data.service';
 import { NewEventDialogData } from '../models/newEventDialogData';
 
@@ -10,9 +12,16 @@ import { NewEventDialogData } from '../models/newEventDialogData';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private dataService: DataService) { }
+  public events: any = [];
+
+  constructor(public dialog: MatDialog, private dataService: DataService, 
+    private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    // no need to check for auth bcse authguard does it before onInit()
+    this.dataService.getEvents().subscribe((events) => {
+      this.events = events;
+    });
   }
 
   openNewEventDialog() {

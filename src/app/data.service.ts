@@ -48,16 +48,10 @@ export class DataService {
   }
 
   getEvents() {
-    if(!localStorage.getItem(constants.lsTokenKey)) {
-      return;
-    }
     return this.http.get('/api/events', {headers: this.createAuthorizationHeader()});
   }
 
   getVenues() {
-    if(!localStorage.getItem(constants.lsTokenKey)) {
-      return;
-    }
     return this.http.get('/api/venues', {headers: this.createAuthorizationHeader()});
   }
 }

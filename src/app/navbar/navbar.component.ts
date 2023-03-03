@@ -1,5 +1,3 @@
-import { SocialUser } from '@abacritt/angularx-social-login';
-import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';

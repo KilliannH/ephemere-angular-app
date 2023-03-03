@@ -1,5 +1,10 @@
 <div class="container">
-    <p>No events found nearby</p>
+    <div *ngIf="!events.length">
+        <p>No events found nearby</p>
+    </div>
+    <div *ngIf="events.length">
+        <a *ngFor="let event of events" [routerLink]="'/events/' + event.id">{{event.name}}</a>
+    </div>
     <button mat-raised-button color="primary" (click)="openNewEventDialog()"><mat-icon>add</mat-icon> Create one</button>
     <button mat-button color="primary" (click)="debug()">Debug</button>
 </div>
