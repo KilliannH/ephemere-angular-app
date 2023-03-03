@@ -24,11 +24,12 @@ export class NavbarComponent implements OnInit {
         this.authService.getLoginStatus().then((response: any) => {
           console.log(response);
           if(response && response.status == 'connected') {
-            this.authService.getUserInfos(response).then((res: any) => {
-              console.log(res);
+            // this will trigger the request line 32 to be
+             this.authService.getUserInfos(response).then((res: any) => {
+              console.log("res from getUserInfosNavbar", res);
             });
           }
-          this.userInfoSubscritpion$ = this.authService.userInfo$.subscribe((data) => {
+          this.authService.userInfo$.subscribe((data) => {
             if(data) {
               this._connUser = data;
               console.log("logged in with user data: ", data);

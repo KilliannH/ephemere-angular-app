@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AuthService } from '../auth.service';
 import { DataService } from '../data.service';
 import { NewEventDialogData } from '../models/newEventDialogData';
+import constants from '../constants';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +20,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // no need to check for auth bcse authguard does it before onInit()
-    this.dataService.getEvents().subscribe((events) => {
-      this.events = events;
-    });
+    // check for ls token, it should be there
+    if(!localStorage.getItem(constants.lsTokenKey)) {
+      this.authService.logout().then(() => {
+        // weirdie case (user manually removed token from ls) so.. reload all page
+        window.location.reload();
+      });
+      return;
+    }
+    this.dataService.getEvents().subscribe((events) => this.events = events);
   }
 
   openNewEventDialog() {

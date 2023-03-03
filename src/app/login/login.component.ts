@@ -18,11 +18,9 @@ export class LoginComponent {
     return this.authService.signInWithFB().then((response: any) => {
       // TODO - extract this somewhere else.
       // We do an api login from every successful auth methods 
-      console.log("ccc", response);
       const claims = {
         sub: {
-            facebookId: response.authResponse.userID,
-            accessToken: response.authResponse.accessToken
+            facebookId: response.authResponse.userID
         },
         issuer: constants.appName
       }
@@ -32,8 +30,9 @@ export class LoginComponent {
         name: response.userInfos.name,
         imageUrl: response.userInfos.picture.data.url
       }
+      console.log("apiLogin from loginCOmponent, userInfos object", userInfos);
       return this.dataService.apiLogin(claims, userInfos).then((res) => {
-        console.log("doSigninWithFB",res);
+        console.log("doSigninWithFB", res);
         return this.router.navigate(['/home']);
       });
     });
